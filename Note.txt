@@ -1,0 +1,16 @@
+nest --help 
+nest start
+nest start --watch
+nest g co user
+nest g mo user
+nest g s user 
+npm install class-validator class-transformer
+npm install nestjs-knexjs knex --force 
+npm install mysql 
+npm i knex  
+knex init 
+knex migrate:make users 
+
+Few necessary links:
+https://github.com/typestack/class-validator
+https://stackoverflow.com/questions/65711755/nestjs-swagger-generated-docs-do-not-show-param-information
