@@ -6,6 +6,7 @@ import { UserController } from './user/user.controller';
 import { UserModule } from './user/user.module';
 import { NestjsKnexModule } from 'nestjs-knexjs';
 import { UserService } from './user/user.service';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -19,12 +20,14 @@ import { UserService } from './user/user.service';
       },
     }),
     UserModule,
+    AuthModule,
   ],
   controllers: [AppController, UserController],
   providers: [AppService, UserService],
 })
-export class AppModule implements NestModule {
-  configure(consumer: MiddlewareConsumer) {
-    consumer.apply(LoginMiddleware).forRoutes('user');
-  }
-}
+export class AppModule {}
+// export class AppModule implements NestModule {
+//   configure(consumer: MiddlewareConsumer) {
+//     consumer.apply(LoginMiddleware).forRoutes('user');
+//   }
+// }

@@ -1,7 +1,8 @@
-import { Body, Req, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Req, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
 import { Controller, Delete, Get, Post, Put } from '@nestjs/common';
 import { ApiBody, ApiParam } from '@nestjs/swagger';
 import { Request } from 'express';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { User } from 'src/dto/user.dto';
 import { UserService } from './user.service';
 
@@ -19,6 +20,7 @@ export class UserController {
   }
 
   @Get(':id')
+  @UseGuards(JwtAuthGuard)
   @ApiParam({ name: 'id' })
   async findUser(@Req() request: Request) {
     var user = await this.userService.findUser(request.params.id);

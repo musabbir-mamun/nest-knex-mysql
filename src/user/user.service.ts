@@ -2,10 +2,20 @@ import { Inject, Injectable } from '@nestjs/common';
 import { Knex } from 'knex';
 import { KNEX_CONNECTION } from 'nestjs-knexjs';
 
+export type User = any;
 @Injectable()
 export class UserService {
   table_name: string = 'user';
   constructor(@Inject(KNEX_CONNECTION) private readonly knex: Knex) {}
+
+  async findOne(username: string, password: string): Promise<any | undefined> {
+    const res = await this.knex(this.table_name)
+      .where({ email: username })
+      .where({ password: password })
+      .select('id', 'name', 'email', 'password')
+      .first();
+    return res;
+  }
 
   async getAllUser() {
     return await this.knex(this.table_name).select('id', 'name', 'email');
