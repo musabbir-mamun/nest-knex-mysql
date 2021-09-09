@@ -14,3 +14,7 @@ knex migrate:make users
 Few necessary links:
 https://github.com/typestack/class-validator
 https://stackoverflow.com/questions/65711755/nestjs-swagger-generated-docs-do-not-show-param-information
+
+API Gateway (Express Gateway) implementation links:
+https://www.express-gateway.io/getting-started/
+https://marmicode.io/recipe/setup-express-gateway/install-express-gateway
