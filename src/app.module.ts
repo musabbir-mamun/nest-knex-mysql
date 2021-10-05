@@ -7,27 +7,31 @@ import { UserModule } from './user/user.module';
 import { NestjsKnexModule } from 'nestjs-knexjs';
 import { UserService } from './user/user.service';
 import { AuthModule } from './auth/auth.module';
+import { APP_GUARD } from '@nestjs/core';
+import { RolesGuard } from './guard/roles.guard';
 
 @Module({
-  imports: [
-    NestjsKnexModule.register({
-      client: 'mysql',
-      connection: {
-        host: 'localhost',
-        user: 'root',
-        password: '',
-        database: 'nest',
-      },
-    }),
-    UserModule,
-    AuthModule,
-  ],
-  controllers: [AppController, UserController],
-  providers: [AppService, UserService],
+    imports: [
+        NestjsKnexModule.register({
+            client: 'mysql',
+            connection: {
+                host: 'localhost',
+                user: 'root',
+                password: '',
+                database: 'nest',
+            },
+        }),
+        UserModule,
+        AuthModule,
+    ],
+    controllers: [AppController, UserController],
+    providers: [
+        AppService, UserService
+    ],
 })
-export class AppModule {}
-// export class AppModule implements NestModule {
-//   configure(consumer: MiddlewareConsumer) {
-//     consumer.apply(LoginMiddleware).forRoutes('user');
-//   }
-// }
+// export class AppModule { }
+export class AppModule implements NestModule {
+    configure(consumer: MiddlewareConsumer) {
+        consumer.apply(LoginMiddleware).forRoutes('user');
+    }
+}

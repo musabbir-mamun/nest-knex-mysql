@@ -8,6 +8,6 @@ export class User {
   @IsEmail()
   email: string;
 
-  @Length(4, 10, { message: 'Length should be between 4 to' })
+  @Length(4, 10, { message: 'Length should be between 4 to 10' })
   password: string;
 }

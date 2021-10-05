@@ -12,7 +12,7 @@ export class UserService {
     const res = await this.knex(this.table_name)
       .where({ email: username })
       .where({ password: password })
-      .select('id', 'name', 'email', 'password')
+      .select('id', 'name', 'email', 'password', 'user_type_id')
       .first();
     return res;
   }
@@ -33,7 +33,7 @@ export class UserService {
   async findUser(id: any): Promise<any[]> {
     const res = await this.knex(this.table_name)
       .where({ id: id })
-      .select('id', 'name', 'email');
+      .select('id', 'name', 'email', 'user_type_id');
     return res;
   }
 
