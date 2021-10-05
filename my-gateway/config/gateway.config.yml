@@ -30,6 +30,10 @@ pipelines:
     apiEndpoints:
       - user
     policies:
+      - rate-limit:
+          - action:
+              max: 1
+              windowMs: 2000
       - proxy:
           action:
             serviceEndpoint: user-service
