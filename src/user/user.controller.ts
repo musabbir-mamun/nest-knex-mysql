@@ -12,74 +12,29 @@ export class UserController {
 
     @Get()
     async getAllUser(@Req() request: Request) {
-        var users = await this.userService.getAllUser();
-        return {
-            error: false,
-            users,
-        };
+        return await this.userService.getAllUser();
     }
 
     @Get(':id')
     @UseGuards(JwtAuthGuard)
     @ApiParam({ name: 'id' })
     async findUser(@Req() request: Request) {
-        var user = await this.userService.findUser(request.params.id);
-        if (user) {
-            return {
-                error: false,
-                user,
-            };
-        } else {
-            return {
-                error: true,
-            };
-        }
+        return await this.userService.findUser(request.params.id);
     }
 
     @Post()
     @UsePipes(ValidationPipe)
     async createUser(@Body() user: User) {
-        var res = await this.userService.createUser(user);
-
-        if (res) {
-            return {
-                error: false,
-                id: res,
-            };
-        } else {
-            return {
-                error: true,
-            };
-        }
+        return await this.userService.createUser(user);
     }
 
     @Put()
     async updateUser(@Req() request: Request) {
-        var res = await this.userService.updateUser(request.body);
-
-        if (res) {
-            return {
-                error: false,
-                updated_row: res,
-            };
-        } else {
-            return {
-                error: true,
-            };
-        }
+        return await this.userService.updateUser(request.body);
     }
 
     @Delete()
     async deleteUser(@Req() request: Request) {
-        var res = await this.userService.deleteUser(request.body.id);
-        if (res) {
-            return {
-                error: false,
-            };
-        } else {
-            return {
-                error: true,
-            };
-        }
+        return await this.userService.deleteUser(request.body.id);
     }
 }
